@@ -10,7 +10,7 @@ authors = [
   { name="Antoine Soulier", email="asoulier@google.com" },
 ]
 description = "LC3 Codec library wrapper"
-requires-python = ">=3.10"
+requires-python = ">=3.9"
 
 [project.optional-dependencies]
 dev = ["pytest"]

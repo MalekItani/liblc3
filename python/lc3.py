@@ -194,15 +194,14 @@ class _Base:
         _PcmFormat,
         type[ctypes.c_int16] | type[ctypes.Array[ctypes.c_byte]] | type[ctypes.c_float],
     ]:
-        match bit_depth:
-            case 16:
-                return (_PcmFormat.S16, ctypes.c_int16)
-            case 24:
-                return (_PcmFormat.S24_3LE, 3 * ctypes.c_byte)
-            case None:
-                return (_PcmFormat.FLOAT, ctypes.c_float)
-            case _:
-                raise InvalidArgumentError("Could not interpret PCM bit_depth")
+        if bit_depth == 16:
+            return (_PcmFormat.S16, ctypes.c_int16)
+        elif bit_depth == 24:
+            return (_PcmFormat.S24_3LE, 3 * ctypes.c_byte)
+        elif bit_depth is None:
+            return (_PcmFormat.FLOAT, ctypes.c_float)
+        else:
+            raise InvalidArgumentError("Could not interpret PCM bit_depth")
 
 
 class Encoder(_Base):
